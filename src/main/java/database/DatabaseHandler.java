@@ -1,10 +1,8 @@
 package database;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+
 public class DatabaseHandler {
 
     private static String dbPassord = "12345";
@@ -37,6 +35,23 @@ public class DatabaseHandler {
         }
     }
 
+        public ResultSet getUser(User user){
+            ResultSet resultSet = null;
+
+            String select = "SELECT * FROM " + Const.USER_TABLE + " WHERE " +
+                    Const.USERS_NAME + "=? AND " + Const.USERS_PASSWORD + "=?";
+
+            try {
+                PreparedStatement prSt = getDbConnection().prepareStatement(select);
+                prSt.setString(1,user.getUserName());
+                prSt.setString(2,user.getPassword());
+
+                prSt.executeQuery();
+            }catch (SQLException | ClassNotFoundException e){
+                e.printStackTrace();
+            }
+            return resultSet;
+        }
 
 
 }

@@ -40,13 +40,27 @@ public class RegistrationControl {
     public void registerClickButton() {
 
         registrationButton.setOnAction(event -> {
-            System.out.println("REgister in Register PAge");
-            signUpNewUser();
+
+            String useerText = userNameRegister.getText().trim();
+            String passwordText = passwordRegister.getText().trim();
+            String numberText = numberRegister.getText().trim();
+
+            if(!useerText.equals("") && !passwordText.equals(""))
+
+            try {
+                signUpNewUser();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            else
+                System.out.println("Camp gol");
+
+
         });
 
     }
 
-    private void signUpNewUser() {
+    private void signUpNewUser() throws SQLException {
         DatabaseHandler databaseHandler = new DatabaseHandler();
 
         String username = userNameRegister.getText();
@@ -55,12 +69,14 @@ public class RegistrationControl {
 
         User user = new User(username,password,number);
 
+
         databaseHandler.signUpUser(user);
+        System.out.println("utilizator adaugat");
+
+
     }
 
-    private void loginUser(String usernameRegisterText, String passwordRegisterText) {
 
-    }
 
 
 }
