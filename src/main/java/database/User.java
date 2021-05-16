@@ -11,6 +11,10 @@ public class User {
         this.number = number;
     }
 
+    public User() {
+
+    }
+
     public String getUserName() {
         return userName;
     }
